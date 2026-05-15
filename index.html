@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>7-8月活動看板</title>
+    <title>7-8月活動看板 - 專業 4 欄版</title>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
@@ -90,14 +89,14 @@
 <body>
 
 <div class="page-header">
-    <div class="title-text">7️⃣& 8️⃣月屯門中心活動☀️⛱️</div>
+    <div class="title-text">7️⃣& 8️⃣月屯門中心活動狀況看板☀️⛱️</div>
     <div class="update-date" id="date-display" onclick="updateDate()">最後更新日期: 2024-05-22</div>
 </div>
 
 <div class="toggle-bar">
-    <button class="btn-tool btn-import" onclick="importFromExcel()">📥 批量匯入 Excel</button>
-    <button class="btn-tool btn-file-io" onclick="exportData()">📤 匯出資料備份</button>
-    <button class="btn-tool btn-file-io" onclick="document.getElementById('file-input').click()">📥 匯入備份檔</button>
+    <button class="btn-tool btn-import" onclick="importFromExcel()">📥 批量匯入 (複製 Excel 貼上)</button>
+    <button class="btn-tool btn-file-io" onclick="exportData()">📤 匯出備份</button>
+    <button class="btn-tool btn-file-io" onclick="document.getElementById('file-input').click()">📥 匯入備份</button>
     <input type="file" id="file-input" accept=".json" onchange="importData(event)">
     <button class="btn-tool btn-toggle" onclick="toggleAdmin()">⚙️ 管理介面</button>
 </div>
@@ -118,7 +117,7 @@
         </select>
         <button onclick="addActivity()" style="background:#3b82f6;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:800">＋ 新增活動</button>
     </div>
-    <div style="font-size:11px; margin-top:10px; text-align:center; color:#94a3b8;">* 匯入時請從 Excel 複製「編號、名稱、對象、類型」四欄資料</div>
+    <div style="font-size:11px; margin-top:10px; text-align:center; color:#94a3b8;">* 提示：直接在 Excel 框選資料，Ctrl+C 複製，再點擊綠色按鈕貼上即可。</div>
 </div>
 
 <div class="grid-wrapper">
@@ -167,7 +166,7 @@
 
     // 更新後的 Excel 匯入邏輯
     function importFromExcel() {
-        const raw = prompt("請從 Excel 複製內容並貼在下方：\n(需包含：編號、名稱、對象、類別 四欄)");
+        const raw = prompt("請直接貼上（Ctrl+V）從 Excel 複製的資料：\n(需包含：編號、名稱、對象、類別 四欄)");
         if (!raw) return;
         
         const lines = raw.split('\n');
@@ -182,7 +181,7 @@
                 let cat = cols[3] ? cols[3].trim() : '興趣班';
 
                 // 跳過標題列或空行
-                if (!id || id === "編號" || name === "名稱" || name === "活動/班組名稱") return;
+                if (!id || id === "編號" || id === "ID" || name === "名稱" || name === "活動/班組名稱") return;
 
                 // 處理對象格式
                 if (target !== "" && /^\d/.test(target) && !target.includes("歲") && target.length < 5) target += "歲";
@@ -200,9 +199,9 @@
 
         if(count > 0) {
             render();
-            alert(`成功匯入 ${count} 筆活動！`);
+            alert(`✅ 成功匯入 ${count} 筆活動資料！`);
         } else {
-            alert("匯入失敗，請確認是否複製了正確的 Excel 欄位。");
+            alert("❌ 匯入失敗。請確保您在 Excel 中框選了正確的範圍（編號、名稱、對象、類別）。");
         }
     }
 
