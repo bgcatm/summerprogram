@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>7-8月活動</title>
+    <title>7-8月活動看板 - 全螢幕優化版</title>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
@@ -17,95 +17,95 @@
 
         body { 
             font-family: 'M PLUS Rounded 1c', sans-serif; 
-            background-color: #f1f5f9; padding: 5px; margin: 0; 
-            display: flex; flex-direction: column; align-items: center; 
+            background-color: #f1f5f9; padding: 2px; margin: 0; 
+            display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden; /* 確保全螢幕不出現橫向捲軸 */
         }
         
-        .page-header { position: relative; width: 100%; max-width: 1600px; text-align: center; margin: 10px 0; }
-        .title-text { font-size: 30px; font-weight: 800; color: #1e293b; letter-spacing: 1px; }
-        .update-date { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 12px; color: #64748b; background: white; padding: 4px 10px; border-radius: 6px; border: 1px solid #cbd5e1; cursor: pointer; }
+        .page-header { position: relative; width: 100%; max-width: 1880px; text-align: center; margin: 5px 0; }
+        .title-text { font-size: 26px; font-weight: 800; color: #1e293b; letter-spacing: 1px; }
+        .update-date { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 11px; color: #64748b; background: white; padding: 2px 8px; border-radius: 4px; border: 1px solid #cbd5e1; cursor: pointer; }
 
-        .toggle-bar { width: 100%; max-width: 1600px; display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 8px; padding-right: 15px; }
-        .btn-tool { font-family: 'M PLUS Rounded 1c', sans-serif; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 700; color: white; transition: 0.2s; }
+        .toggle-bar { width: 100%; max-width: 1880px; display: flex; justify-content: flex-end; gap: 5px; margin-bottom: 5px; padding-right: 10px; }
+        .btn-tool { font-family: 'M PLUS Rounded 1c', sans-serif; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 700; color: white; transition: 0.2s; }
         .btn-tool:hover { filter: brightness(1.1); }
         .btn-toggle { background: #64748b; }
         .btn-import { background: #10b981; }
         .btn-file-io { background: #6366f1; }
 
-        .admin-panel { background: #1e293b; color: white; padding: 15px; border-radius: 12px; width: 100%; max-width: 1600px; box-sizing: border-box; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .admin-panel { background: #1e293b; color: white; padding: 10px; border-radius: 8px; width: 100%; max-width: 1880px; box-sizing: border-box; margin-bottom: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .admin-panel.hidden { display: none; }
-        .input-group { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; }
-        .input-group input, .input-group select { font-family: 'M PLUS Rounded 1c', sans-serif; padding: 8px; border-radius: 6px; border: none; font-size: 14px; }
+        .input-group { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; }
+        .input-group input, .input-group select { font-family: 'M PLUS Rounded 1c', sans-serif; padding: 5px; border-radius: 4px; border: none; font-size: 13px; }
 
-        /* 四欄活動區核心排版 */
-        .grid-wrapper { width: 100%; display: flex; justify-content: center; padding-bottom: 50px; }
+        /* 四欄活動區：針對 1920x1080 進行精確配比 */
+        .grid-wrapper { width: 100%; display: flex; justify-content: center; padding-bottom: 10px; }
         .grid-container { 
             display: grid; 
-            grid-template-columns: repeat(4, 385px); 
-            gap: 6px; 
+            grid-template-columns: repeat(4, 460px); /* 460x4 = 1840px，適合 1920 寬度 */
+            column-gap: 8px;
+            row-gap: 3px;
             margin: 0 auto;
         }
 
         .activity-row { 
-            background: white; padding: 0 8px; border-radius: 4px; display: flex; align-items: center; gap: 5px;
-            height: 32px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); border-left: 6px solid #ccc;
-            transition: transform 0.1s;
+            background: white; padding: 0 6px; border-radius: 3px; display: flex; align-items: center; gap: 4px;
+            height: 28px; /* 關鍵：壓縮高度以適應 30 行 */
+            box-shadow: 0 1px 1px rgba(0,0,0,0.05); border-left: 5px solid #ccc;
+            transition: background-color 0.1s;
         }
-        .activity-row:hover { transform: translateX(2px); background-color: #f8fafc; z-index: 10; }
+        .activity-row:hover { background-color: #f1f5f9; }
         
-        .act-id { font-family: monospace; color: #94a3b8; font-size: 10px; width: 42px; flex-shrink: 0; }
+        .act-id { font-family: monospace; color: #94a3b8; font-size: 10px; width: 40px; flex-shrink: 0; }
         
-        /* 名稱顯示優化：字體 12.5px，確保 6 個字以上 */
         .act-name { 
-            font-size: 12.5px; 
+            font-size: 12px; 
             font-weight: 700; 
             flex: 1; 
             white-space: nowrap; 
             overflow: hidden; 
             text-overflow: ellipsis; 
             color: #334155;
-            min-width: 120px; 
+            min-width: 150px; 
         }
 
-        .act-target { font-size: 10px; color: #64748b; width: 70px; text-align: center; flex-shrink: 0; white-space: nowrap; font-weight: 500; }
+        .act-target { font-size: 10px; color: #64748b; width: 75px; text-align: center; flex-shrink: 0; white-space: nowrap; font-weight: 500; }
 
-        .status-select { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 10.5px; padding: 2px 4px; border-radius: 4px; width: 90px; border: 1px solid transparent; cursor: pointer; font-weight: 700; height: 24px; }
+        .status-select { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 10px; padding: 1px 2px; border-radius: 3px; width: 85px; border: 1px solid transparent; cursor: pointer; font-weight: 700; height: 22px; }
         .status-open { background-color: var(--open-bg); color: var(--open-text); }
         .status-warn { background-color: var(--warn-bg); color: var(--warn-text); }
         .status-full { background-color: var(--full-bg); color: var(--full-text); }
 
-        .delete-btn { color: #cbd5e1; cursor: pointer; font-size: 18px; opacity: 0; width: 15px; text-align: center; }
+        .delete-btn { color: #cbd5e1; cursor: pointer; font-size: 16px; opacity: 0; width: 15px; text-align: center; }
         .activity-row:hover .delete-btn { opacity: 1; }
         .delete-btn:hover { color: #ef4444; }
 
         #file-input { display: none; }
 
-        /* 響應式：螢幕不夠寬時自動降欄 */
-        @media (max-width: 1580px) { .grid-container { grid-template-columns: repeat(3, 385px); } }
-        @media (max-width: 1190px) { .grid-container { grid-template-columns: repeat(2, 385px); } }
-        @media (max-width: 780px) { .grid-container { grid-template-columns: 385px; } }
+        @media (max-width: 1850px) { .grid-container { grid-template-columns: repeat(3, 460px); } }
+        @media (max-width: 1400px) { .grid-container { grid-template-columns: repeat(2, 460px); } }
     </style>
 </head>
 <body>
 
 <div class="page-header">
-    <div class="title-text">7️⃣& 8️⃣月屯門中心活動☀️⛱️</div>
+    <div class="title-text">7️⃣& 8️⃣月屯門中心活動狀況看板☀️⛱️</div>
     <div class="update-date" id="date-display" onclick="updateDate()">最後更新日期: 2024-05-22</div>
 </div>
 
 <div class="toggle-bar">
-    <button class="btn-tool btn-import" onclick="importFromExcel()">📥 批量匯入 (複製 Excel 貼上)</button>
+    <button class="btn-tool btn-import" onclick="importFromExcel()">📥 批量匯入</button>
     <button class="btn-tool btn-file-io" onclick="exportData()">📤 匯出備份</button>
     <button class="btn-tool btn-file-io" onclick="document.getElementById('file-input').click()">📥 匯入備份</button>
     <input type="file" id="file-input" accept=".json" onchange="importData(event)">
-    <button class="btn-tool btn-toggle" onclick="toggleAdmin()">⚙️ 管理介面</button>
+    <button class="btn-tool btn-toggle" onclick="toggleAdmin()">⚙️ 管理</button>
 </div>
 
 <div class="admin-panel" id="admin-panel">
     <div class="input-group">
-        <input type="text" id="act-id" style="width:70px" placeholder="編號">
-        <input type="text" id="act-name" style="width:280px" placeholder="活動名稱">
-        <input type="text" id="act-target" style="width:120px" placeholder="對象 (如: 6-12)">
+        <input type="text" id="act-id" style="width:60px" placeholder="編號">
+        <input type="text" id="act-name" style="width:250px" placeholder="活動名稱">
+        <input type="text" id="act-target" style="width:100px" placeholder="對象">
         <select id="act-cat">
             <option value="興趣班">興趣班 (紅)</option>
             <option value="幼兒">幼兒 (藍)</option>
@@ -115,9 +115,8 @@
             <option value="義工">義工 (粉)</option>
             <option value="親子">親子 (紫)</option>
         </select>
-        <button onclick="addActivity()" style="background:#3b82f6;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:800">＋ 新增活動</button>
+        <button onclick="addActivity()" style="background:#3b82f6;color:white;border:none;padding:8px 15px;border-radius:4px;cursor:pointer;font-weight:800">＋ 新增</button>
     </div>
-    <div style="font-size:11px; margin-top:10px; text-align:center; color:#94a3b8;">* 提示：直接在 Excel 框選資料，Ctrl+C 複製，再點擊綠色按鈕貼上即可。</div>
 </div>
 
 <div class="grid-wrapper">
@@ -131,15 +130,9 @@
 
     const colorMap = { '興趣班': '#ef4444', '幼兒': '#3b82f6', '兒童': '#facc15', '青年': '#22c55e', '21C': '#f97316', '義工': '#ec4899', '親子': '#a855f7' };
 
-    let activities = JSON.parse(localStorage.getItem('activity_v_4col_pro')) || [];
-    let savedDate = localStorage.getItem('update_date_pro') || "2024-05-22";
+    let activities = JSON.parse(localStorage.getItem('activity_v_1080p')) || [];
+    let savedDate = localStorage.getItem('update_date_1080p') || "2024-05-22";
     document.getElementById('date-display').innerText = "最後更新日期: " + savedDate;
-
-    // 自動補「歲」邏輯
-    targetInput.addEventListener('blur', function() {
-        let val = this.value.trim();
-        if (val !== "" && /^\d/.test(val) && !val.includes("歲") && !val.includes("-")) this.value = val + "歲";
-    });
 
     function render() {
         gridContent.innerHTML = '';
@@ -161,56 +154,31 @@
             `;
             gridContent.appendChild(div);
         });
-        localStorage.setItem('activity_v_4col_pro', JSON.stringify(activities));
+        localStorage.setItem('activity_v_1080p', JSON.stringify(activities));
     }
 
-    // 更新後的 Excel 匯入邏輯
     function importFromExcel() {
-        const raw = prompt("請直接貼上（Ctrl+V）從 Excel 複製的資料：\n(需包含：編號、名稱、對象、類別 四欄)");
+        const raw = prompt("請貼上從 Excel 複製的資料：\n(編號、名稱、對象、類別)");
         if (!raw) return;
-        
         const lines = raw.split('\n');
         let count = 0;
-
         lines.forEach(line => {
             const cols = line.split('\t');
             if (cols.length >= 2) {
-                let id = cols[0].trim();
-                let name = cols[1].trim();
-                let target = cols[2] ? cols[2].trim() : '-';
-                let cat = cols[3] ? cols[3].trim() : '興趣班';
-
-                // 跳過標題列或空行
-                if (!id || id === "編號" || id === "ID" || name === "名稱" || name === "活動/班組名稱") return;
-
-                // 處理對象格式
-                if (target !== "" && /^\d/.test(target) && !target.includes("歲") && target.length < 5) target += "歲";
-
-                activities.push({
-                    id: id,
-                    name: name,
-                    target: target,
-                    category: cat,
-                    status: 'open'
-                });
+                let id = cols[0].trim(), name = cols[1].trim(), target = cols[2]?.trim() || '-', cat = cols[3]?.trim() || '興趣班';
+                if (!id || id === "編號" || name === "名稱") return;
+                activities.push({ id, name, target, category: cat, status: 'open' });
                 count++;
             }
         });
-
-        if(count > 0) {
-            render();
-            alert(`✅ 成功匯入 ${count} 筆活動資料！`);
-        } else {
-            alert("❌ 匯入失敗。請確保您在 Excel 中框選了正確的範圍（編號、名稱、對象、類別）。");
-        }
+        if(count > 0) { render(); alert(`成功匯入 ${count} 筆活動！`); }
     }
 
     function exportData() {
-        if (activities.length === 0) return alert("目前沒有資料");
         const blob = new Blob([JSON.stringify(activities, null, 2)], { type: "application/json" });
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
-        link.download = `活動看板備份_${new Date().toLocaleDateString()}.json`;
+        link.download = `活動看板備份.json`;
         link.click();
     }
 
@@ -221,41 +189,26 @@
         reader.onload = function(evt) {
             try {
                 const data = JSON.parse(evt.target.result);
-                if (Array.isArray(data) && confirm("這將覆蓋現有資料，確定嗎？")) { 
-                    activities = data; 
-                    render(); 
-                }
-            } catch { alert("讀取備份檔失敗，請確認檔案格式。"); }
+                if (Array.isArray(data)) { activities = data; render(); }
+            } catch { alert("失敗"); }
         };
         reader.readAsText(file);
-        e.target.value = '';
     }
 
     function addActivity() {
-        const id = idInput.value.trim(), name = nameInput.value.trim();
-        let target = targetInput.value.trim();
-        if (!id || !name) return alert("請輸入編號與活動名稱");
-        if (target !== "" && /^\d/.test(target) && !target.includes("歲") && !target.includes("-")) target += "歲";
+        const id = idInput.value.trim(), name = nameInput.value.trim(), target = targetInput.value.trim();
+        if (!id || !name) return;
         activities.push({ id, name, target: target || '-', category: catInput.value, status: 'open' });
-        render(); 
-        idInput.value = ''; nameInput.value = ''; targetInput.value = '';
+        render(); idInput.value = ''; nameInput.value = ''; targetInput.value = '';
     }
 
     function toggleAdmin() { document.getElementById('admin-panel').classList.toggle('hidden'); }
-    
     function updateDate() {
-        const d = prompt("請輸入最後更新日期:", savedDate);
-        if(d) { 
-            savedDate = d; 
-            document.getElementById('date-display').innerText = "最後更新日期: " + d; 
-            localStorage.setItem('update_date_pro', d); 
-        }
+        const d = prompt("日期:", savedDate);
+        if(d) { savedDate = d; document.getElementById('date-display').innerText = "最後更新日期: " + d; localStorage.setItem('update_date_1080p', d); }
     }
-
     window.updateStatus = (idx, s) => { activities[idx].status = s; render(); };
-    window.deleteItem = (idx) => { if(confirm("確定刪除此活動？")) { activities.splice(idx, 1); render(); } };
-    
-    // 初始化渲染
+    window.deleteItem = (idx) => { if(confirm("確定刪除？")) { activities.splice(idx, 1); render(); } };
     render();
 </script>
 </body>
